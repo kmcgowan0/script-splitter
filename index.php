@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (isset($_POST['input-text'])) {
     $original = $_POST['input-text'];
     $sections = str_split($original, 20000);
@@ -11,55 +11,116 @@ if (isset($_POST['input-text'])) {
 <html>
 <head>
 <title>Script Splitter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {
-font-family: sans-serif;
-text-align: center;
+*{
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
-textarea {
-    width: 80%;
-    height: 200px;
+body{
 }
+.wrap{
+  margin: 0 auto;
+  width: 100vw;
+  background: linear-gradient(135deg, #eb5454 0%, #6d8cec 100%);
+  height: 100vh;
+}
+
+h1{
+  padding: 1em 0;
+}
+
 .hidden-content {
     display: none;
 }
-table {
-    width:80%; 
-    margin-left: auto; 
-    margin-right: auto;
-    
+textarea{
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 25em;
+  font-size: 14px;
+  color: #979797;
+  width: 80%;
+  margin-bottom: 3em;
+  margin-top: 3em;
+  text-align: left;
 }
-.result {
-    margin-top: 3em;
+
+input[type="submit"]{
+  width: 40%;
+  height: 3em;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  margin-bottom: 3em;
 }
-table tr:nth-child(even) {
-    background-color: #eee;
+input[type="submit"]:hover {
+  background-color: #ff5722;
+      box-shadow: 0px 15px 20px rgba(119, 29, 0, 0.73);
+  color: #fff;
+  transform: translateY(-7px);
 }
-table tr:nth-child(odd) {
-    background-color: #fff;
+p{
+  margin-bottom: 1em;
 }
-.teaser-div {
-    display: flex;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+
+.result{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
-.copy-this {
-        border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
-    border-style: solid;
-    border-width: 1px;
-    padding: 1px 7px 2px;
+
+table{
+  width: 65%;
+  text-align: center;
+  margin-left: 20%;
+  margin-top: 3em;
 }
-.a-section {
-    margin: 2em;
+
+.copy-this{
+  width: 100%;
+  font-size: 11px;
+  height: auto;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  margin-bottom: 3em;
+  padding: 5px;
 }
-input[type='submit'] {
-    display: block;
-    width: 20%;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top: 1em;
+.copy-this:hover {
+  background-color: #ff5722;
+      box-shadow: 0px 15px 20px rgba(119, 29, 0, 0.73);
+  color: #fff;
+  transform: translateY(-7px);
 }
+td p{
+  margin-right: 10px;
+}
+@media only screen and (max-device-width: 375px) {
+    td{
+      display: block;
+    }
+
+}
+
 </style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118662668-1"></script>
@@ -73,7 +134,7 @@ input[type='submit'] {
 
 </head>
 <body>
-
+<div class="wrap">
 <h1>Script Splitter</h1>
 <p>This is a tool to split movie scripts (or any big chunk of text) into appropriately sized chunks to send via Facebook messenger.</p>
 <p>This is a tool to torture your friends</p>
@@ -89,23 +150,24 @@ input[type='submit'] {
     <table>
 
     <?php $sectionCount = 1;
-    foreach ($sections as $section) { 
+    foreach ($sections as $section) {
 $teaser = substr($section, 0, 100);
 $teaserEnd = substr($section, -100);
         ?>
         <tr class="a-section">
     <td><p class="teaser">"<?php echo $teaser; ?>......<?php echo $teaserEnd; ?>"</p></td>
-    <td style="background-color: #fff;"><button class="copy-this" onclick="copyToClipboard(document.getElementById('section-<?php echo $sectionCount; ?>'));">Copy Section <?php echo $sectionCount; ?></button></td> 
+    <td><button class="copy-this" onclick="copyToClipboard(document.getElementById('section-<?php echo $sectionCount; ?>'));">Copy Section <?php echo $sectionCount; ?></button></td>
   </tr>
 
 <div id="section-<?php echo $sectionCount; ?>" class="hidden-content"><?php echo $section; ?></div>
 
-    <?php 
+    <?php
     $sectionCount++;
 } ?>
 </table>
 </div>
-<?php 
+</div>
+<?php
 } ?>
 <script>
 
@@ -136,7 +198,7 @@ function copyToClipboard(elem) {
     var currentFocus = document.activeElement;
     target.focus();
     target.setSelectionRange(0, target.value.length);
-    
+
     // copy the selection
     var succeed;
     try {
@@ -148,7 +210,7 @@ function copyToClipboard(elem) {
     if (currentFocus && typeof currentFocus.focus === "function") {
         currentFocus.focus();
     }
-    
+
     if (isInput) {
         // restore prior selection
         elem.setSelectionRange(origSelectionStart, origSelectionEnd);
