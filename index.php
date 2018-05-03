@@ -69,7 +69,7 @@ input[type="submit"]:hover {
   background-color: #ff5722;
       box-shadow: 0px 15px 20px rgba(119, 29, 0, 0.73);
   color: #fff;
-  transform: translateY(-7px);
+  transform: translateY(-3px);
 }
 p{
   margin-bottom: 1em;
